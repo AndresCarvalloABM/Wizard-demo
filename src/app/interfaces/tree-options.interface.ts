@@ -7,6 +7,7 @@ export interface TreeOption {
   id: string;
   parent: string;
   depth: number;
+  title: string;
 }
 
 

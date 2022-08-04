@@ -3,10 +3,13 @@
 </div>
 
 <main class="content" *ngIf="!workflowFinished; else end">
-  <h1 style="margin-bottom: 4rem">
+  <h1 style="margin-bottom: 2rem">
     Welcome to <span style="color: #008962">APPLIED BIOMATH</span> WIZARD
   </h1>
-  <h2>Step: {{ currentStep }}</h2>
+
+  <abm-selection *ngIf="length >= 1" [selection]="getSelection()"></abm-selection>
+
+  <h2>Step: {{ currentStep }} - {{ title }}</h2>
   <abm-dropdown
     label="Select an option"
     valueSelected="Bispecific Antibody"
@@ -38,11 +41,7 @@
   <section class="ending">
     <h1>ABM Wizard over. You did great!</h1>
     <h3>OPTIONS SELECTED:</h3>
-    <ul>
-      <li *ngFor="let option of options; let i = index">
-        <h5>OPTION {{ i + 1 }}: {{ option.option }}</h5>
-      </li>
-    </ul>
+    <abm-selection *ngIf="length >= 1" [selection]="getSelection()"></abm-selection>
     <button mat-raised-button color="primary" (click)="onReset()">
       Run again
     </button>

@@ -11,7 +11,7 @@ import { DataService } from './services/data.service';
 })
 export class AppComponent implements OnInit {
   dataSource!: Option[];
-  step!: number;
+  step = 1;
   control = new FormControl('', Validators.required);
   workflowFinished = false;
   private optionsSelected: TreeOption[] = [];
@@ -55,12 +55,27 @@ export class AppComponent implements OnInit {
     this.optionsSelected = [];
   }
 
+  getSelection(): { title: string; option: string }[] {
+    return this.optionsSelected?.map((opt) => ({
+      title: opt.title,
+      option: opt.option
+    }));
+  }
+
   get options() {
     return this.optionsSelected;
   }
 
+  get length() {
+    return this.optionsSelected.length;
+  }
+
   get currentStep() {
     return this.optionsSelected?.length > 0 ? this.optionsSelected[this.optionsSelected.length - 1].depth + 1 : 1;
+  }
+
+  get title() {
+    return this.dataService.getTitle(this.step);
   }
 
   private mapToOptions(options?: TreeOption[]): void {

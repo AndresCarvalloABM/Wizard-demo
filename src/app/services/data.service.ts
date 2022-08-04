@@ -31,6 +31,10 @@ export class DataService {
     return this.depth;
   }
 
+  getTitle(step: number): string {
+    return treeOptions.content.find((opt) => opt.depth === step)?.title!;
+  }
+
   getOptionById(id: string): TreeOption {
     return treeOptions.content.find((treeOption) => treeOption.id === id)!;
   }

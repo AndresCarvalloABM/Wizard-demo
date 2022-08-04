@@ -7,9 +7,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './common/material/material.module';
 import { DropdownComponent } from './common/dropdown/dropdown.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SelectionComponent } from './common/selection/selection.component';
 
 @NgModule({
-  declarations: [AppComponent, DropdownComponent],
+  declarations: [AppComponent, DropdownComponent, SelectionComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
