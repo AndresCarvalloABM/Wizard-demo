@@ -1,0 +1,57 @@
+:host {
+  .logo-container {
+    padding: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    .logo {
+      background: url('../assets/logo_tag.svg');
+      height: 6rem;
+      width: 25rem;
+      background-position: center;
+      background-size: cover;
+    }
+  }
+
+  .mat-stepper-horizontal {
+    margin-top: 8px;
+  }
+
+  .mat-form-field {
+    margin-top: 16px;
+  }
+
+  .content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 10rem;
+
+    .actions {
+      width: 50%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    abm-dropdown {
+      width: 50%;
+    }
+  }
+
+  .ending {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .visible {
+    visibility: hidden !important;
+  }
+}
