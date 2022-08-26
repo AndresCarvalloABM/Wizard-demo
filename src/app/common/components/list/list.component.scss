@@ -1,0 +1,44 @@
+:host {
+  .selected {
+    box-shadow: 2px 2px 2px 2px #ccc;
+    background-color: #008962;
+    color: #fff;
+  }
+
+  .list-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 22rem;
+
+    .main {
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+      border: 1px solid #008962;
+      margin: 1rem;
+      border-radius: 1rem;
+
+      &:hover {
+        cursor: pointer;
+        box-shadow: 2px 2px 2px 2px #ccc;
+      }
+
+      .detail {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        p {
+          margin: 0 1.5rem;
+        }
+
+        .image {
+          width: 4rem;
+          width: 4rem;
+        }
+      }
+    }
+  }
+}

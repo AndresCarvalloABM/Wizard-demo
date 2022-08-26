@@ -1,0 +1,14 @@
+<section class="list-container">
+  <section
+    class="main"
+    *ngFor="let option of options; let i = index"
+    [ngClass]="{ selected: i === indexSelected }"
+    (click)="onSelect(option, i)"
+  >
+    <h3 class="title">{{ option.option }}</h3>
+    <section class="detail">
+      <img class="image" [src]="option.imgUrl" [alt]="option.title" />
+      <p class="description">{{ option.description }}</p>
+    </section>
+  </section>
+</section>

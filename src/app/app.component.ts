@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 
-import { Option, TreeOption } from './interfaces/tree-options.interface';
+import { TreeOption } from './interfaces/tree-options.interface';
 import { DataService } from './services/data.service';
 
 @Component({
@@ -10,10 +10,11 @@ import { DataService } from './services/data.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  dataSource!: Option[];
   step = 1;
   control = new FormControl('', Validators.required);
   workflowFinished = false;
+  theOptions: TreeOption[] = [];
+  indexSelected = -1;
   private optionsSelected: TreeOption[] = [];
 
   constructor(private dataService: DataService) {}
@@ -31,14 +32,17 @@ export class AppComponent implements OnInit {
 
     this.step -= 1;
     this.mapToOptions(previousOptions);
+    this.indexSelected = this.optionsSelected[this.optionsSelected.length - 1].index || -1;
     this.control.reset();
     this.popOptionSelected();
   }
 
   onNext(): void {
     if (this.control?.value) {
-      const id = this.control.value;
+      const optionSelected = this.control.value as any as TreeOption;
+      const id = optionSelected.id;
       const nextOptions: TreeOption[] = this.dataService.getNextOptions(id, ++this.step);
+      this.indexSelected = -1;
       this.storeOptionSelected(id);
 
       if (nextOptions?.length > 0) {
@@ -53,6 +57,8 @@ export class AppComponent implements OnInit {
     this.mapToOptions();
     this.workflowFinished = false;
     this.optionsSelected = [];
+    this.indexSelected = -1;
+    this.control.reset();
   }
 
   getSelection(): { title: string; option: string }[] {
@@ -80,20 +86,9 @@ export class AppComponent implements OnInit {
 
   private mapToOptions(options?: TreeOption[]): void {
     const initialOptions = this.dataService.getInitialOptions();
-    this.dataSource = options?.length
-      ? this.getOptions(options)
-      : this.getOptions(initialOptions);
-  }
-
-  private getOptions(options: TreeOption[]) {
-    return options.map((treeData) => {
-      const option: Option = {
-        id: treeData.id,
-        value: treeData.option,
-      };
-
-      return option;
-    });
+    this.theOptions = options?.length
+      ? options
+      : initialOptions;
   }
 
   private storeOptionSelected(id: string): void {
@@ -103,7 +98,7 @@ export class AppComponent implements OnInit {
 
   private popOptionSelected(): void {
     const optionSelected = this.optionsSelected[this.step - 1];
-    this.control.patchValue(optionSelected.id);
+    this.control.patchValue(optionSelected as any);
 
     const newOptions = this.optionsSelected.slice(0, this.optionsSelected.length - 1);
     this.optionsSelected = [...newOptions];

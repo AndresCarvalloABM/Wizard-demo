@@ -8,6 +8,9 @@ export interface TreeOption {
   parent: string;
   depth: number;
   title: string;
+  description: string;
+  imgUrl: string;
+  index?: number;
 }
 
 

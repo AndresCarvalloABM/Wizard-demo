@@ -27,9 +27,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 10rem;
+    padding-top: 1.5rem;
 
     .actions {
+      padding-bottom: 1rem;
       width: 50%;
       display: flex;
       justify-content: space-between;
