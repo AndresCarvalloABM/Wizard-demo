@@ -2,12 +2,15 @@
   <div class="logo"></div>
 </div>
 
+<input type="text" data-cy="editable-input">
+
 <main class="content" *ngIf="!workflowFinished; else end">
   <h1 style="margin-bottom: 2rem">
     Welcome to <span style="color: #008962">Applied Biomath</span> WIZARD
   </h1>
 
   <abm-selection
+    cy-selector="abm-selection"
     *ngIf="length >= 1"
     [selection]="getSelection()"
   ></abm-selection>
@@ -20,18 +23,25 @@
     [formControl]="control"
   ></abm-dropdown> -->
 
-  <abm-list [formControl]="control" [options]="theOptions" [indexSelected]="indexSelected"></abm-list>
+  <abm-list
+    cy-selector="abm-list"
+    [formControl]="control"
+    [options]="theOptions"
+    [indexSelected]="indexSelected"
+  ></abm-list>
 
   <section class="actions">
     <button
-      [ngClass]="{ visible: step === 1 }"
+      cy-selector="button-back"
       mat-stroked-button
       color="primary"
+      [ngClass]="{ visible: step === 1 }"
       (click)="onBack()"
     >
       Back
     </button>
     <button
+      cy-selector="button-next"
       mat-raised-button
       color="primary"
       [disabled]="control.invalid"
